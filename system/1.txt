@@ -1,0 +1,28 @@
+io.use((socket, next) => {
+	next();
+  //console.log(socket.id);
+  if(socket.handshake.query.authcode !== undefined && socket.handshake.query.authcode !== null){
+  let token = socket.handshake.query.authcode;
+  console.log(token);
+  gpapi.getAuthUrl(token)
+  .then(
+  	response => {
+    console.scob("онксвем рнйем юбрнпхгюжхх",response);
+    console.scob("йкхемр опньек юбрнпхгюжхч",socket.id);
+    next();
+    },
+    error => {
+    console.log(error);
+    console.errreason("["+socket.id+"] ме опньек юбрнпхгюжхч",error);
+    socket.disconnect(true);
+    })
+}
+ // console.log("ШШ");
+  //console.log(token);
+  //if (token == "AAA") {
+ //   next();
+    //socket.disconnect();
+ // }
+ // socket.disconnect(true);
+//  next(new Error('not authorized'));
+});
